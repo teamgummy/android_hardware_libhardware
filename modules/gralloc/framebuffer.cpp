@@ -33,7 +33,7 @@
 #include <cutils/log.h>
 #include <cutils/atomic.h>
 #ifdef OMAP_COMPAT
-#include <linux/omapfb.h>
+#include <hardware/omapfb.h>
 #endif
 
 #if HAVE_ANDROID_OS
