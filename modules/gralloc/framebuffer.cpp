@@ -32,6 +32,9 @@
 
 #include <cutils/log.h>
 #include <cutils/atomic.h>
+#ifdef OMAP_COMPAT
+#include <linux/omapfb.h>
+#endif
 
 #if HAVE_ANDROID_OS
 #include <linux/fb.h>
@@ -102,6 +105,15 @@ static int fb_post(struct framebuffer_device_t* dev, buffer_handle_t buffer)
             m->base.unlock(&m->base, buffer); 
             return -errno;
         }
+
+#ifdef OMAP_COMPAT
+        unsigned int dummy;
+        if (ioctl(m->framebuffer->fd, OMAPFB_WAITFORGO, &dummy) < 0) {
+            LOGE("OMAPFB_WAITFORGO failed");
+            return 0;
+        }
+#endif /* #ifdef OMAP_COMPAT */
+
         m->currentBuffer = buffer;
         
     } else {
