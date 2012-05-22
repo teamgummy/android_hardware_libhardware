@@ -384,6 +384,11 @@ struct audio_policy_service_ops {
                          float volume,
                          int delay_ms);
 #endif
+
+#ifdef OMAP_ENHANCEMENT
+    int (*set_FMRxActive)(void *service, bool state);
+#endif
+
 };
 
 /**********************************************************************/

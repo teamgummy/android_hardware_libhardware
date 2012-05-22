@@ -137,6 +137,28 @@ enum {
     HWC_TRANSFORM_ROT_270 = HAL_TRANSFORM_ROT_270,
 };
 
+#ifdef OMAP_ENHANCEMENT
+/*
+ * hwc_layer_t::bufLayout values
+ */
+enum {
+    /* Buffer Layout: Progressive */
+    HWC_BUFFERS_LAYOUT_PROGRESSIVE             = NATIVE_WINDOW_BUFFERS_LAYOUT_PROGRESSIVE,
+    /* Buffer Layout: Interleaveframe Top field First*/
+    HWC_BUFFERS_LAYOUT_INTERLEAVE_TOP_FIRST    = NATIVE_WINDOW_BUFFERS_LAYOUT_INTERLEAVE_TOP_FIRST,
+    /* Buffer Layout: Interleaveframe Bottom field First*/
+    HWC_BUFFERS_LAYOUT_INTERLEAVE_BOTTOM_FIRST = NATIVE_WINDOW_BUFFERS_LAYOUT_INTERLEAVE_BOTTOM_FIRST,
+    /* Buffer Layout: Noninterleave Top Field First */
+    HWC_BUFFERS_LAYOUT_TOP_FIRST               = NATIVE_WINDOW_BUFFERS_LAYOUT_TOP_FIRST,
+    /* Buffer Layout: Noninterleave Bottom Field First*/
+    HWC_BUFFERS_LAYOUT_BOTTOM_FIRST            = NATIVE_WINDOW_BUFFERS_LAYOUT_BOTTOM_FIRST,
+    /* Buffer Layout: Only Top Field */
+    HWC_BUFFERS_LAYOUT_TOP_ONLY                = NATIVE_WINDOW_BUFFERS_LAYOUT_TOP_ONLY,
+    /* Buffer Layout: Only Bottom Field*/
+    HWC_BUFFERS_LAYOUT_BOTTOM_ONLY             = NATIVE_WINDOW_BUFFERS_LAYOUT_BOTTOM_ONLY,
+};
+#endif
+
 typedef struct hwc_rect {
     int left;
     int top;
@@ -194,6 +216,11 @@ typedef struct hwc_layer {
      * The visible region INCLUDES areas overlapped by a translucent layer.
      */
     hwc_region_t visibleRegionScreen;
+
+#ifdef OMAP_ENHANCEMENT
+    /* The layout of the data within the buffer */
+    uint32_t buf_layout;
+#endif
 } hwc_layer_t;
 
 
