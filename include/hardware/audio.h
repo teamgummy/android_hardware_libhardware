@@ -73,10 +73,6 @@ __BEGIN_DECLS
 #define AUDIO_PARAMETER_STREAM_FRAME_COUNT "frame_count"
 #define AUDIO_PARAMETER_STREAM_INPUT_SOURCE "input_source"
 
-#ifdef OMAP_ENHANCEMENT
-#define AUDIO_PARAMETER_STREAM_FM_ROUTING "fm_routing"
-#endif
-
 /**************************************/
 
 /* common audio stream parameters and operations */
@@ -287,7 +283,7 @@ struct audio_hw_device {
      */
     int (*set_master_volume)(struct audio_hw_device *dev, float volume);
 
-#ifdef QCOM_HARDWARE
+#if defined(QCOM_HARDWARE) && defined(FM_RADIO)
     /** set the fm audio volume. Range is between 0.0 and 1.0 */
     int (*set_fm_volume)(struct audio_hw_device *dev, float volume);
 #endif
